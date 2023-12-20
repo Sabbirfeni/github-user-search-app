@@ -31,7 +31,7 @@ body {
 .app-body {
   margin-top: 0.7vw;
   margin-bottom: 0.7vw;
-  gap: 15px;
+  gap: 10px;
   border-radius: 10px;
 }
 
@@ -143,7 +143,7 @@ body {
   flex: 1;
   padding: 15px;
   border-radius: 10px;
-  height: fit-content;
+  /* height: fit-content; */
 }
 
 .right-body {
@@ -211,23 +211,33 @@ body {
 }
 
 .profile-details button {
-  background-color: #252525;
+  background-color: #1b1b1b;
   width: 100%;
-  color: #a0a0a0;
+  color: #bbbbbb;
   font-size: 14px;
   padding: 6px 0px;
   border: none;
   outline: none;
   border-radius: 4px;
-  margin-bottom: 5px;
+  margin-top: 15px;
   transition: 0.2s ease;
 }
 
+.profile-details button a {
+  color: #5a5a5a;
+}
+
+.profile-details button:hover .profile-details button a {
+  color: #c4c4c4;
+}
+
+
 .profile-details button:hover {
-  background-color: #252525;
+  background-color: #363636;
   width: 100%;
   color: #d8d8d8;
 }
+
 
 .profile-details a {
   color: #5a5a5a;
@@ -266,14 +276,63 @@ body {
   }
 }
 
+.right-body {
+  height: 90vh;
+  overflow-y: scroll;
+}
 
+.right-body::-webkit-scrollbar {
+  display: none;
+}
 
+.represitories {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+}
 
+@media only screen and (max-width: 600px) {
+  .represitories {
+    grid-template-columns: auto;
+  }
+}
 
+.represitories > div {
+  border: 1px solid #272727;
+  padding: 15px 20px;
+  font-size: 13px;
+  border-radius: 10px;
+  color: #8f8f8f;
+}
 
+.represitory p {
+  margin-bottom: 0;
+}
 
+.represitory-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.represitory-header p {
+  border: 1px solid #272727;
+  padding: 5px 20px;
+  border-radius: 20px;
+  font-size: 11px;
+}
 
+.represitory-language {
+  margin-top: 30px;
+}
+
+.badge {
+  width: 10px;
+  height: 10px;
+  background-color: #ff4d4d;
+  border-radius: 50%;
+  margin-right: 5px;
+}
 
 
 

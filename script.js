@@ -30,44 +30,49 @@ async function getRepos(userName) {
 
 function createCard(profile) {
     const profileCard = `
-        <div>
-            <div>
-                <img src='${profile.avatar_url}'/>
+        <div class="profile-info">
+            <div class="profile-image-container">
+                <img src="${profile.avatar_url}" alt="profile image"> <!-- Profile image -->
             </div>
-            <div>
-                ${profile.login}
-            </div>
-            <div>
-                ${profile.bio}
+            <div class="profile-details">
+                <h2>${profile.name}</h2>
+                <p>${profile.login}</p>
+                <h5>${profile.bio}</h5>
+                <button ><a href='${profile.html_url}' target='_blank'>Visit full profile</a></button>
             </div>
         </div>
     `
-    document.querySelector('.main').innerHTML = profileCard;
+    document.querySelector('.left-body').innerHTML = profileCard;
 }
 
 function addToCard(reposes) {
-    let serial = 1;
     reposContainer.innerHTML = '';
     let reposHTML = ``;
     reposes.forEach(repos => {
         reposHTML += `
-        <div>
-            ${serial} - ${repos.name}
+        <div class="represitory">
+            <div class="represitory-header">
+                <a href="${repos.html_url}" target='_blank'>${repos.name}</a>
+                <p class="represitory-status">${repos.visibility}</p>
+            </div>
+            <p class="represitory-language"><div class="badge"> </div>${repos.language}</p>
         </div>
     `
-        serial++;
     });
-    document.querySelector('.repos').innerHTML = reposHTML;
+    document.querySelector('.represitories').innerHTML = reposHTML;
 }
 
-document.querySelector('.form').addEventListener('submit', e => {
-    e.preventDefault();
+document.querySelector('.form').addEventListener('keydown', e => {
 
-    const user = document.querySelector('.search').value;
-    if(user) {
-        getUsers(user);
-        getRepos(user);
-    } else {
-        console.log('did not found')
+    if(e.key === 'Enter') {
+        e.preventDefault();
+        console.log(e.target.value)
+        const user = document.querySelector('.search').value;
+        if(user) {
+            getUsers(user);
+            getRepos(user);
+        } else {
+            console.log('did not found')
+        }
     }
 })
