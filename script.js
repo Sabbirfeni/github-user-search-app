@@ -11,7 +11,7 @@ async function getUsers(userName) {
         console.log(data)
         createCard(data);
     } catch(err) {
-        console.log(err.message);
+        document.querySelector('.initial-text').innerHTML = 'Did not found'
     }
 }
 async function getRepos(userName) {
@@ -24,7 +24,7 @@ async function getRepos(userName) {
         console.log(data)
         addToCard(data);
     } catch(err) {
-        console.log(err.message);
+        document.querySelector('.initial-text').innerHTML = 'Did not found'
     }
 }
 
@@ -32,7 +32,8 @@ function createCard(profile) {
     const profileCard = `
         <div class="profile-info">
             <div class="profile-image-container">
-                <img src="${profile.avatar_url}" alt="profile image"> <!-- Profile image -->
+                
+            <img src="${profile.avatar_url}" alt="profile image"> <!-- Profile image -->
             </div>
             <div class="profile-details">
                 <h2>${profile.name}</h2>
@@ -66,13 +67,13 @@ document.querySelector('.form').addEventListener('keydown', e => {
 
     if(e.key === 'Enter') {
         e.preventDefault();
-        console.log(e.target.value)
+        document.querySelector('.initial-text').innerHTML = 'Loading...'
         const user = document.querySelector('.search').value;
         if(user) {
             getUsers(user);
             getRepos(user);
         } else {
-            console.log('did not found')
+            document.querySelector('.initial-text').innerHTML = 'Please enter a username'
         }
     }
 })
