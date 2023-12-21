@@ -143,7 +143,11 @@ body {
   flex: 1;
   padding: 15px;
   border-radius: 10px;
-  /* height: fit-content; */
+  display: none;
+}
+
+.left-body.active {
+  display: block;
 }
 
 .right-body {

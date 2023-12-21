@@ -1,30 +1,39 @@
 const USER_API = 'https://api.github.com/users/';
 const reposContainer = document.querySelector('.repos');
+const leftBody = document.querySelector('.left-body');
+const initialText = document.querySelector('.initial-text');
+const represitories = document.querySelector('.represitories');
 
 async function getUsers(userName) {
     try {
+        
         const response = await fetch(USER_API + userName);
         if(response.status !== 200) {
             throw new Error('Did not found.')
         }
         const data = await response.json();
-        console.log(data)
+        leftBody.style.display = 'block';
         createCard(data);
     } catch(err) {
-        document.querySelector('.initial-text').innerHTML = 'Did not found'
+        leftBody.style.display = 'none';
     }
 }
 async function getRepos(userName) {
+    
     try {
+        
         const response = await fetch(USER_API + userName + '/repos');
         if(response.status !== 200) {
             throw new Error('Did not found.')
         }
         const data = await response.json();
-        console.log(data)
+        represitories.style.display = 'grid'
         addToCard(data);
+        initialText.style.display = 'none'
     } catch(err) {
-        document.querySelector('.initial-text').innerHTML = 'Did not found'
+        represitories.style.display = 'none'
+        initialText.style.display = 'flex'
+        initialText.innerHTML = 'Did not found'
     }
 }
 
@@ -43,7 +52,8 @@ function createCard(profile) {
             </div>
         </div>
     `
-    document.querySelector('.left-body').innerHTML = profileCard;
+    leftBody.classList.add('active');
+    leftBody.innerHTML = profileCard;
 }
 
 function addToCard(reposes) {
@@ -64,9 +74,19 @@ function addToCard(reposes) {
 }
 
 document.querySelector('.form').addEventListener('keydown', e => {
-
+    const inputValue = e.target.value
+    
     if(e.key === 'Enter') {
         e.preventDefault();
+        if(inputValue == '') {
+            console.log('inputValue')
+            initialText.style.display = 'flex'
+            initialText.innerHTML = 'Please enter a username'
+            leftBody.style.display = 'none';
+            represitories.style.display = 'none'
+            return
+        }
+        
         document.querySelector('.initial-text').innerHTML = 'Loading...'
         const user = document.querySelector('.search').value;
         if(user) {
